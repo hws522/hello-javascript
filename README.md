@@ -603,6 +603,7 @@ javascript, everyday는 출력하지 않았다. 왜 그럴까? 그것은 return 
 
 자바스크립트는 함수를 정의하는 또 다른 방법을 제공한다. 다음 예제를 보자. 아래 방법은 함수를 정의 하는 또 다른 방법이다.
 
+```
     var numbering = function (){
         i = 0;
         while(i < 10){
@@ -611,5 +612,14 @@ javascript, everyday는 출력하지 않았다. 왜 그럴까? 그것은 return 
         }   
     }
     numbering();
-
+```   
+```
+    (function (){
+        i = 0;
+        while(i < 10){
+            document.write(i);
+            i += 1;
+        }   
+    })(); //익명함수. 바로 실행된다. 1회성 실행에 사용된다.
+```
 
