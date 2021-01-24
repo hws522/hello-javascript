@@ -241,7 +241,7 @@ else if를 이용하면 조건문을 좀 더 풍부하게 할 수 있다. 아래
 
 else if는 좀 더 다양한 케이스의 조건을 검사할 수 있는 기회를 제공한다. else if의 특징은 if나 else와는 다르게 여러개가 올 수 있다는 점이다. else if의 모든 조건이 false라면 else가 실행된다. else는 생략 가능하다.
 
-앞서 배운 변수와 비교연산자 그리고 조건문을 결합해보자. ID의 값으로 egoing을 입력해보고, 다른 값도 입력해보자. 아래의 예제는 브라우저에서 실행해야 한다. 다른 환경에서는 원하는데로 동작하지 않을 것이다.
+앞서 배운 변수와 비교연산자 그리고 조건문을 결합해보자. ID의 값으로 hello을 입력해보고, 다른 값도 입력해보자. 아래의 예제는 브라우저에서 실행해야 한다. 다른 환경에서는 원하는데로 동작하지 않을 것이다.
 
     <!DOCTYPE html>
     <html>
@@ -251,7 +251,7 @@ else if는 좀 더 다양한 케이스의 조건을 검사할 수 있는 기회�
     <body>
         <script>
             id = prompt('아이디를 입력해주세요.')
-            if(id=='egoing'){
+            if(id=='hello'){
                 alert('아이디가 일치 합니다.')
             } else {
                 alert('아이디가 일치하지 않습니다.')
@@ -260,7 +260,7 @@ else if는 좀 더 다양한 케이스의 조건을 검사할 수 있는 기회�
     </body>
     </html>
 
-위의 내용에서 prompt() 구문은 사용자가 입력한 값을 가져와서 id 변수의 값으로 대입한다. 이러한 것을 API 또는 함수라고 부르는데, 이에 대한 내용은 곧 배운다. 사용자가 입력한 값이 egoing이라면 '아이디가 일치 합니다'를 출력하고 그렇지 않다면 '아이디가 일치하지 않습니다'를 출력한다.
+위의 내용에서 prompt() 구문은 사용자가 입력한 값을 가져와서 id 변수의 값으로 대입한다. 이러한 것을 API 또는 함수라고 부르는데, 이에 대한 내용은 곧 배운다. 사용자가 입력한 값이 hello이라면 '아이디가 일치 합니다'를 출력하고 그렇지 않다면 '아이디가 일치하지 않습니다'를 출력한다.
 
 **조건문의 중첩** 
 
@@ -274,7 +274,7 @@ else if는 좀 더 다양한 케이스의 조건을 검사할 수 있는 기회�
     <body>
         <script>
             id = prompt('아이디를 입력해주세요.');
-            if(id=='egoing'){
+            if(id=='hello'){
                 password = prompt('비밀번호를 입력해주세요.');
                 if(password==='111111'){
                     alert('인증 했습니다.');
@@ -319,7 +319,7 @@ if문 안에 다시 if문이 등장했다. 즉 사용자가 입력한 값과 아
         <script>
             id = prompt('아이디를 입력해주세요.');
             password = prompt('비밀번호를 입력해주세요.');
-            if(id=='egoing' && password=='111111'){
+            if(id=='hello' && password=='111111'){
                 alert('인증 했습니다.');
             } else {
                 alert('인증에 실패 했습니다.');
@@ -331,7 +331,7 @@ if문 안에 다시 if문이 등장했다. 즉 사용자가 입력한 값과 아
 
 중첩된 if문을 하나로 줄였다. 덕분에 코드의 복잡성도 낮아졌다. &&는 아래와 같은 의미를 만든다.
 
-"id의 값이 egoing이고 password의 값이 111111이면 참이다"
+"id의 값이 hello이고 password의 값이 111111이면 참이다"
 
 즉 && 연산자의 좌항과 우항이 모두 참일 때 전체가 참이 되는 것이다.
 
@@ -352,10 +352,10 @@ if문 안에 다시 if문이 등장했다. 즉 사용자가 입력한 값과 아
         alert(4);
     }
 
-다음 예제는 id 값으로 egoing, k8805, sorialgi 중의 하나를 입력하면 '인증 했습니다'가 출력되고, 그 외의 값을 입력하면 '인증에 실패 했습니다.'를 출력하는 예제다.
+다음 예제는 id 값으로 hello, javascript, study 중의 하나를 입력하면 '인증 했습니다'가 출력되고, 그 외의 값을 입력하면 '인증에 실패 했습니다.'를 출력하는 예제다.
 
     id = prompt('아이디를 입력해주세요.');
-    if(id==='egoing' || id==='k8805' || id==='sorialgi'){
+    if(id==='hello' || id==='javascript' || id==='study'){
         alert('인증 했습니다.');
     } else {
         alert('인증에 실패 했습니다.');
@@ -364,20 +364,20 @@ if문 안에 다시 if문이 등장했다. 즉 사용자가 입력한 값과 아
 
 위의 예제에서는 논리 연산자를 3개 사용했다. 2개만 사용하는 것이 아니라는 것을 보여주기 위한 예제다.
 
-다음 예제는 id 값으로 egoing, k8805, sorialgi 중의 하나를 사용하고 비밀번호는 111111을 입력하면 right 외의 경우에는 wrong를 출력하는 예다.
+다음 예제는 id 값으로 hello, javascript, study 중의 하나를 사용하고 비밀번호는 111111을 입력하면 right 외의 경우에는 wrong를 출력하는 예다.
 
 
     id = prompt('아이디를 입력해주세요.');
     password = prompt('비밀번호를 입력해주세요.');
-    if((id==='egoing' || id==='k8805' || id==='sorialgi') && password==='111111'){
+    if((id==='hello' || id==='javascript' || id==='study') && password==='111111'){
     alert('인증 했습니다.');
     } else {
         alert('인증에 실패 했습니다.');
     }
 
-위의 예제에서는 or와 and를 혼합해서 사용하는 방법을 보여준다. id 값을 테스트 하는 구간을 괄호()로 묶었다. 사용자가 id의 값으로 egoing 비밀번호를 111111을 입력했다면 연산의 순서는 아래와 같이 된다.
+위의 예제에서는 or와 and를 혼합해서 사용하는 방법을 보여준다. id 값을 테스트 하는 구간을 괄호()로 묶었다. 사용자가 id의 값으로 hello 비밀번호를 111111을 입력했다면 연산의 순서는 아래와 같이 된다.
 
-1. (id=="egoing" or id=="k8805" or id=="sorialgi") : true가 된다.
+1. (id=="hello" or id=="javascript" or id=="study") : true가 된다.
 2. password=='111111' : true가 된다.
 3. true(1항) and true(2항) : true가 된다.
 
@@ -626,3 +626,163 @@ javascript, everyday는 출력하지 않았다. 왜 그럴까? 그것은 return 
 자바스크립트를 함수형 언어로 표현하기도 한다. 
 
 자바스크립트는 다른언어에 비해, 함수라는 것이 이 언어에서 차지하는 위상이 매우 높다 할 수 있다.
+
+<br>
+
+### **배열**
+---
+배열(array)이란 연관된 데이터를 모아서 통으로 관리하기 위해서 사용하는 데이터 타입이다. 변수가 하나의 데이터를 저장하기 위한 것이라면 배열은 여러 개의 데이터를 하나의 변수에 저장하기 위한 것이라고 할 수 있다. 아래의 예제를 보자. 변수 name에는 문자 study가 할당되었다. 이제부터 name을 호출하면 문자 study를 사용할 수 있다.
+
+    var name = 'study'
+    alert(name);
+
+그렇다면 여러 개의 데이터를 하나의 변수에 담아서 관리할 수 있는 방법은 없을까? 있다. 배열을 쓰면 된다. 변수 member에 회원정보를 담아보자. 대괄호([])는 배열을 만드는 기호다. 대괄호 안에 데이터를 콤마(,)로 구분해서 나열하면 배열이 된다.
+
+    var member = ['hello', 'javascript', 'study']
+
+하나의 변수에 3개의 데이터를 담았다. 각각의 데이터를 원소(Element)이라고 부른다. 자 그럼 이 데이터를 꺼내오려면 어떻게 해야 할까? 아래의 예제를 보자.
+
+    var member = ['hello', 'javascript', 'study']
+    alert(member[0]);
+    alert(member[1]);
+    alert(member[2]);
+
+결과는 아래의 문자열을 차례로 경고창으로 출력 할 것이다.
+
+    hello
+    javascript
+    study
+
+즉 배열에 담겨있는 값을 가져올 때는 대괄호 안에 숫자를 넣는다. 이 숫자를 색인(index)라고 부르고 0부터 시작한다. 즉 첫번째 원소(hello)를 가져오려면 대괄호 안에 0을 넣어주어야 한다는 것이다. 두번째는 1, 세번째는 2를 입력한다. 이 값을 이용해서 배열에 저정된 값을 가져올 수 있다.
+
+배열의 진가는 반복문과 결합했을 때 나타난다. 반복문으로 리스트에 담긴 정보를 하나씩 꺼내서 처리 할 수 있기 때문이다. 다음 예제를 보자
+
+    function get_members(){
+        return ['hello', 'javascript', 'study'];
+    }
+    members = get_members();
+    // members.length는 배열에 담긴 값의 숫자를 알려준다. 
+    for(i = 0; i < members.length; i++){
+        // members[i].toUpperCase()는 members[i]에 담긴 문자를 대문자로 변환해준다.
+        document.write(members[i].toUpperCase());   
+        document.write('<br />');
+    }
+
+
+    //HELLO
+    //JAVASCRIPT
+    //STUDY
+
+위의 예제에서 주목해야 할 것은 반복문과 배열을 결합한 부분이다. 반복문을 이용해서 배열 members의 내용을 하나씩 꺼낸 후에 이름을 대문자로 변경한 후에 출력하고 있다. 정리하면, 배열이란 연관된 정보를 하나의 그룹으로 관리하기 위해서 사용한다. 그리고 그 정보를 처리 할 때는 반복문을 이용한다.
+
+다음은 배열의 끝에 원소를 추가하는 방법이다. push는 인자로 전달된 값을 배열(li)에 추가하는 명령이다. 배열 li의 값은 a, b, c, d, e, f가 됐다.
+
+    var li = ['a', 'b', 'c', 'd', 'e'];
+    li.push('f');
+    alert(li);
+
+다음은 복수의 원소를 배열에 추가하는 방법이다. concat은 인자로 전달된 값을 추가하는 명령이다.
+
+    var li = ['a', 'b', 'c', 'd', 'e'];
+    li = li.concat(['f', 'g']);
+    alert(li);
+
+다음은 배열의 시작점에 원소를 추가하는 방법이다. 배열 li는 z, a, b, c, d, e가 됐다. unshift는 인자로 전달한 값을 배열의 첫번째 원소로 추가하고 배열의 기존 값들의 색인을 1씩 증가시킨다.
+
+    var li = ['a', 'b', 'c', 'd', 'e'];
+    li.unshift('z');
+    alert(li);
+
+만약 두번째 인덱스 뒤에 대문자 B를 넣고 싶다면 아래와 같이한다. splice는 첫번째 인자에 해당하는 원소부터 두번째 인자에 해당하는 원소의 숫자만큼의 값을 배열로부터 제거한 후에 리턴한다. 그리고 세번째 인자부터 전달된 인자들을 첫번째 인자의 원소 뒤에 추가한다.
+
+    var li = ['a', 'b', 'c', 'd', 'e'];
+    li.splice(2, 0, 'B');
+    alert(li);
+
+다음은 배열의 첫번째 원소를 제거하는 방법이다. shift를 사용하면 된다. 아래 결과는 b, c, d, e 다.
+
+    var li = ['a', 'b', 'c', 'd', 'e'];
+    li.shift();
+    alert(li);
+
+다음은 배열 끝점의 원소를 배열 li에서 제거한다. 이때는 pop를 사용한다. 결과는 a, b, c, d 다.
+
+    var li = ['a', 'b', 'c', 'd', 'e'];
+    li.pop();
+    alert(li);
+
+다음은 정렬하는 방법이다. 결과는 a, b, c, d, e 다.
+
+    var li = ['c', 'e', 'a', 'b', 'd'];
+    li.sort();
+    alert(li);
+
+역순으로 정렬하고 싶을 때는 아래와 같이 한다.
+
+    var li = ['c', 'e', 'a', 'b', 'd'];
+    li.reverse();
+    alert(li);
+
+<br>
+
+### **객체**
+---
+
+지금까지 살펴본 배열은 아이템에 대한 식별자로 숫자를 사용했다. 데이터가 추가되면 배열 전체에서 중복되지 않는 인덱스가 자동으로 만들어져서 추가된 데이터에 대한 식별자가 된다. 이 인덱스를 이용해서 데이터를 가져오게 되는 것이다. 만약 인덱스로 문자를 사용하고 싶다면 객체(dictionary)를 사용해야 한다. 다른 언어에서는 연관배열(associative array) 또는 맵(map), 딕셔너리(Dictionary)라는 데이터 타입이 객체에 해당한다.
+
+
+다음은 객체를 만드는 법이다.
+
+    var grades = {'hello': 10, 'javascript': 6, 'study': 80};
+
+위의 예제에서 hello은 key가 되고, 10은 value가 된다. 아래는 객체를 만드는 다른 방법이다.
+
+    var grades = {};
+    grades['hello'] = 10;
+    grades['javascript'] = 6;
+    grades['study'] = 80;
+
+아래와 같은 방법으로 객체를 만들수도 있다.
+
+    var grades = new Object();
+    grades['hello'] = 10;
+    grades['javascript'] = 6;
+    grades['study'] = 80;
+
+객체를 만들었으니 이제는 객체에서 필요한 값을 가져와보자. 다음은 study라는 이름(key)으로 저장된 값을 가져오는 법이다. 결과는 80이다.
+
+    var grades = {'hello': 10, 'javascript': 6, 'study': 80};
+    alert(grades['study']);
+
+다음 방법으로도 객체의 속성에 접근 할 수 있다.
+
+    alert(grades.study);
+
+다음은 객체에 저장된 데이터를 기준으로 반복작업을 하는 방법이다.
+
+    var grades = {'hello': 10, 'javascript': 6, 'study': 80};
+    for(key in grades) {
+        document.write("key : "+key+" value : "+grades[key]+"<br />");
+    }
+
+결과는 아래와 같다.
+
+    key :   hello value : 10
+    key :   javascript value : 6
+    key :   study value : 80
+
+for 문은 in 뒤에 따라오는 배열의 key 값을 in 앞의 변수 name에 담아서 반복문을 실행한다. 반복문이 실행될 때 변수 key의 값으로 hello, javascript, study가 순차적으로 할당되기 때문에 grades[key]를 통해서 객체의 값을 알아낼 수 있다.
+
+객체에는 객체를 담을수도 있고, 함수도 담을 수 있다. 
+
+    var grades = {
+        'list': {'hello': 10, 'javascript': 6, 'study': 80},
+        'show' : function(){
+            for(var name in this.list){
+                document.write(name+':'+this.list[name]+"<br />");
+            }
+        }
+    };
+    grades.show();
+
+이것은 자바스크립트를 이용한 객체 지향 프로그래밍 기법의 핵심이 되는 성질로 취지에 따라서 로직을 객체에 그룹핑해서 객체라는 부품을 조립해서 소프트웨어라는 완제품을 만들 수 있게 해준다. 객체 지향에 대해서는 뒤에서 자세히 살펴본다.
