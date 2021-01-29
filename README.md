@@ -762,14 +762,14 @@ javascript, everyday는 출력하지 않았다. 왜 그럴까? 그것은 return 
 
     var grades = {'hello': 10, 'javascript': 6, 'study': 80};
     for(key in grades) {
-        document.write("key : "+key+" value : "+grades[key]+"<br />");
+        document.write("key : " +key+ " value : " +grades[key]+ "<br />");
     }
 
 결과는 아래와 같다.
 
-    key :   hello value : 10
-    key :   javascript value : 6
-    key :   study value : 80
+    key : hello value : 10
+    key : javascript value : 6
+    key : study value : 80
 
 for 문은 in 뒤에 따라오는 배열의 key 값을 in 앞의 변수 name에 담아서 반복문을 실행한다. 반복문이 실행될 때 변수 key의 값으로 hello, javascript, study가 순차적으로 할당되기 때문에 grades[key]를 통해서 객체의 값을 알아낼 수 있다.
 
@@ -786,3 +786,155 @@ for 문은 in 뒤에 따라오는 배열의 key 값을 in 앞의 변수 name에 
     grades.show();
 
 이것은 자바스크립트를 이용한 객체 지향 프로그래밍 기법의 핵심이 되는 성질로 취지에 따라서 로직을 객체에 그룹핑해서 객체라는 부품을 조립해서 소프트웨어라는 완제품을 만들 수 있게 해준다. 객체 지향에 대해서는 뒤에서 자세히 살펴본다.
+
+<br>
+
+### **모듈**
+---
+
+순수한 자바스크립트에서는 모듈(module)이라는 개념이 분명하게 존재하지는 않는다. 하지만 자바스크립트가 구동되는 호스트 환경에 따라서 서로 다른 모듈화 방법이 제공되고 있다. 이 수업에서는 자바스크립트의 대표적인 호스트 환경인 웹브라우저에서 로직을 모듈화하는 방법에 대해서 알아볼 것이다.
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+        <script>
+            function welcome(){
+                return 'Hello world'
+            }
+            alert(welcome());
+        </script>
+    </body>
+    </html>
+
+위의 코드는 아무런 문제가 없다. 하지만 welcome 함수가 자주 사용되는 것이라고 가정해보자. 이런 경우 이것이 필요할 때마다 이 함수를 정의해서 사용하는 것은 유지보수도 어렵고 낭비가 될 것이다. 이럴 때 모듈이 필요하다. 함수 welcome을 모듈로 만들어보자.
+
+새로운 파일을 만든다. 이름은 greeting.js 다. 자바스크립트 파일은 확장자로 js를 사용한다.
+
+**greeting.js**
+
+    function welcome(){
+        return 'Hello world';
+    }
+
+**main.html**
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8"/>
+        <script src="greeting.js"></script>
+    </head>
+    <body>
+        <script>
+            alert(welcome());
+        </script>
+    </body>
+    </html>
+
+이전 예제와 비교했을 때 결과는 같다. 하지만 함수 welcome을 main.html의 외부 파일로 분리했다. 다음은 위의 코드에 대한 분석이다.
+
+**`<script src="greeting.js"></script>`**
+
+JavaScript와 HTML은 완전히 다른 문법을 가진 언어다. 그런데 HTML 문서 안에는 JavaScript와 HTML이 동시에 표현된다. 따라서 브라우저에게 어디서부터 어디까지가 JavaScript이고, HTML인지를 구분해서 알려줘야 한다. 이 역할을 하는 HTML 태그가 script 태그다. script 태그 안쪽에 위치하는 컨텐츠는 브라우저에 의해서 JavaScript로 인식된다. 그런데 위의 코드는 컨텐츠 대신에 src 속성이 있다. 브라우저는 src 속성에 있는 파일을 다운로드해서 실행시킨다. greeting.js에는 함수 welcome가 정의되어 있기 때문에 main.html 안에 이 함수가 정의 되어 있지 않음에도 실행할 수 있는 것이다.
+
+<br>
+
+모듈을 로드하는 방법은 호스트 환경에 따라서 달라진다. Node.js에서는 아래와 같은 방법으로 모듈을 로드한다.
+
+**node.circle.js (로드될 대상)**
+
+    var PI = Math.PI;
+  
+    exports.area = function (r) {
+    return PI * r * r;
+    };
+  
+    exports.circumference = function (r) {
+    return 2 * PI * r;
+    };
+
+**node.demo.js (로드의 주체)**
+
+    var circle = require('./node.circle.js');
+    console.log( 'The area of a circle of radius 4 is '
+               + circle.area(4));
+
+아래는 실행방법과 실행 결과다.
+
+    F:\BitNami\wampstack-5.4.22-0\apache2\htdocs\javascript\module>node node.demo.js
+    The area of a circle of radius 4 is 50.26548245743669
+
+**라이브러리**
+
+라이브러리는 모듈과 비슷한 개념이다. 모듈이 프로그램을 구성하는 작은 부품으로서의 로직을 의미한다면 라이브러리는 자주 사용되는 로직을 재사용하기 편리하도록 잘 정리한 일련의 코드들의 집합을 의미한다고 할 수 있다. 프로그래밍의 세계에는 휼룡한 라이브러리가 많다. 좋은 라이브러리를 선택하고 잘 사용하는 것은 프로그래밍의 핵심이라고 할 수 있다. 
+
+아래 예제는 유명 라이브러리인 jQuery를 사용하는 방법이다. 
+
+jQuery 홈페이지에서 파일을 다운로드 받는다. 
+
+http://jquery.com/
+
+jQuery 메뉴얼을 이용해서 사용법을 파악한다.
+
+http://api.jquery.com/
+
+아래는 jQuery를 이용한 예제이다.
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    </head>
+    <body>
+        <ul id="list">
+            <li>empty</li>
+            <li>empty</li>
+            <li>empty</li>
+            <li>empty</li>
+        </ul>
+        <input id="execute_btn" type="button" value="execute" />
+        <script type="text/javascript">
+        $('#execute_btn').click(function(){
+            $('#list li').text('coding everybody');
+        })
+        </script>
+    </body>
+    </html>
+
+다음은 jQuery를 이용하지 않고 동일한 기능을 구현한 예제이다.
+
+    <!DOCTYPE html>
+    <html>
+    <body>
+        <ul id="list">
+            <li>empty</li>
+            <li>empty</li>
+            <li>empty</li>
+            <li>empty</li>
+        </ul>
+        <input id="execute_btn" type="button" value="execute" />
+        <script type="text/javascript">
+        function addEvent(target, eventType,eventHandler, useCapture) {
+            if (target.addEventListener) { // W3C DOM
+                target.addEventListener(eventType,eventHandler,useCapture?useCapture:false);
+            } else if (target.attachEvent) {  // IE DOM
+                var r = target.attachEvent("on"+eventType, eventHandler);
+            }
+        }
+        function clickHandler(event) {
+            var nav = document.getElementById('list');
+            for(var i = 0; i < nav.childNodes.length; i++) {
+                var child = nav.childNodes[i];
+                if(child.nodeType==3)
+                    continue;
+                child.innerText = 'Coding everybody';
+            }
+        }
+        addEvent(document.getElementById('execute_btn'), 'click', clickHandler);
+        </script>
+    </body>
+    </html>
+
