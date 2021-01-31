@@ -1046,8 +1046,12 @@ i 와 g 를 동시에 쓸 수도 있다.
 <br>
 
 ### **함수지향**
+
+<br>
+
+### **유효범위**
 ---
-**유효범위**
+
 
 유효범위(Scope)는 변수의 수명을 의미한다. 아래의 예제를 보자. 결과는 global이다.
 
@@ -1194,6 +1198,232 @@ a();
 // 5
 ```
 
+<br>
+
+### **값으로서의 함수**
+---
 
 
+JavaScript에서는 함수도 객체다. 다시 말해서 일종의 값이다. 거의 모든 언어가 함수를 가지고 있다. JavaScript의 함수가 다른 언어의 함수와 다른 점은 함수가 값이 될 수 있다는 점이다. 다음 예제를 통해서 그 의미를 알아보자.
 
+    function a(){}
+
+위의 예제에서 함수 a는 변수 a에 담겨진 값이다. 
+    
+    var a = function(){}
+
+또한 함수는 객체의 값으로 포함될 수 있다. 이렇게 객체의 속성 값으로 담겨진 함수를 메소드(method)라고 부른다.
+
+```
+a = {
+    b:function(){
+    }
+};
+```
+
+함수는 값이기 때문에 다른 함수의 인자로 전달 될수도 있다. 아래 예제를 보자.
+
+```
+function cal(func, num){
+    return func(num)
+}
+function increase(num){
+    return num+1
+}
+function decrease(num){
+    return num-1
+}
+alert(cal(increase, 1));
+alert(cal(decrease, 1));
+```
+
+10행을 실행하면 함수 increase와 값 1이 함수 cal의 인자로 전달된다. 함수 cal은 첫번째 인자로 전달된 increase를 실행하는데 이 때 두번째 인자의 값이 1을 인자로 전달한다. 함수 increase은 계산된 결과를 리턴하고 cal은 다시 그 값을 리턴한다.
+
+함수는 함수의 리턴 값으로도 사용할 수 있다.
+
+```
+function cal(mode){
+    var funcs = {
+        'plus' : function(left, right){return left + right},
+        'minus' : function(left, right){return left - right}
+    }
+    return funcs[mode];
+}
+alert(cal('plus')(2,1));
+alert(cal('minus')(2,1));   
+```
+당연히 배열의 값으로도 사용할 수 있다.
+
+```
+var process = [
+    function(input){ return input + 10;},
+    function(input){ return input * input;},
+    function(input){ return input / 2;}
+];
+var input = 1;
+for(var i = 0; i < process.length; i++){
+    input = process[i](input);
+}
+alert(input);
+
+// 60.5
+```
+<br>
+
+### **콜백**
+---
+**처리의 위임**
+
+값으로 사용될 수 있는 특성을 이용하면 함수의 인자로 함수로 전달할 수 있다. 값으로 전달된 함수는 호출될 수 있기 때문에 이를 이용하면 함수의 동작을 완전히 바꿀 수 있다. 인자로 전달된 함수 sortNumber의 구현에 따라서 sort의 동작방법이 완전히 바뀌게 된다.
+
+```
+function sortNumber(a,b){ // 콜백함수.
+    // 위의 예제와 비교해서 a와 b의 순서를 바꾸면 정렬순서가 반대가 된다.
+    return b-a;
+}
+var numbers = [20,1,9,7,6,8,5,4,3,2,10];
+alert(numbers.sort(sortNumber)); // array, [20,10,9,8,7,6,5,4,3,2,1]
+```
+**비동기 처리**
+
+콜백은 비동기처리에서도 유용하게 사용된다. 시간이 오래걸리는 작업이 있을 때 이 작업이 완료된 후에 처리해야 할 일을 콜백으로 지정하면 해당 작업이 끝났을 때 미리 등록한 작업을 실행하도록 할 수 있다.
+
+<br>
+
+### **클로저**
+---
+클로저(closure)는 내부함수가 외부함수의 맥락(context)에 접근할 수 있는 것을 가르킨다. 클로저는 자바스크립트를 이용한 고난이도의 테크닉을 구사하는데 필수적인 개념으로 활용된다.
+
+**내부함수**
+
+자바스크립트는 함수 안에서 또 다른 함수를 선언할 수 있다. 아래의 예제를 보자. 결과는 경고창에 coding everybody가 출력될 것이다.
+
+```
+function outter(){
+    function inner(){
+        var title = 'coding everybody'; 
+        alert(title);
+    }
+    inner();
+}
+outter();
+```
+위의 예제에서 함수 outter의 내부에는 함수 inner가 정의 되어 있다. 함수 inner를 내부 함수라고 한다.
+
+내부함수는 외부함수의 지역변수에 접근할 수 있다. 아래의 예제를 보자. 결과는 coding everybody이다.
+
+```
+function outter(){
+    var title = 'coding everybody';  
+    function inner(){        
+        alert(title);
+    }
+    inner();
+}
+outter();
+```
+
+위의 예제는 내부함수 inner에서 title을 호출(4행)했을 때 외부함수인 outter의 지역변수에 접근할 수 있음을 보여준다.
+
+**클로저**
+
+클로저(closure)는 내부함수와 밀접한 관계를 가지고 있는 주제다. 내부함수는 외부함수의 지역변수에 접근 할 수 있는데 외부함수의 실행이 끝나서 외부함수가 소멸된 이후에도 내부함수가 외부함수의 변수에 접근 할 수 있다. 이러한 메커니즘을 클로저라고 한다. 아래 예제는 이전의 예제를 조금 변형한 것이다. 결과는 경고창으로 coding everybody를 출력할 것이다.
+
+```
+function outter(){
+    var title = 'coding everybody';  
+    return function(){        
+        alert(title);
+    }
+}
+inner = outter();
+inner();
+```
+
+예제의 실행순서를 주의깊게 살펴보자. 7행에서 함수 outter를 호출하고 있다. 그 결과가 변수 inner에 담긴다. 그 결과는 이름이 없는 함수다. 실행이 8행으로 넘어오면 outter 함수는 실행이 끝났기 때문에 이 함수의 지역변수는 소멸되는 것이 자연스럽다. 하지만 8행에서 함수 inner를 실행했을 때 coding everybody가 출력된 것은 외부함수의 지역변수 title이 소멸되지 않았다는 것을 의미한다. 클로저란 내부함수가 외부함수의 지역변수에 접근 할 수 있고, 외부함수는 외부함수의 지역변수를 사용하는 내부함수가 소멸될 때까지 소멸되지 않는 특성을 의미한다.
+
+
+조금 더 복잡한 아래 예제를 살펴보자. 아래 예제는 클로저를 이용해서 영화의 제목을 저장하고 있는 객체를 정의하고 있다. 실행결과는 Ghost in the shell -> Matrix -> 공각기동대 -> Matrix 이다.
+
+```
+function factory_movie(title){
+    return {
+        get_title : function (){
+            return title;
+        },
+        set_title : function(_title){
+            title = _title
+        }
+    }
+}
+ghost = factory_movie('Ghost in the shell');
+matrix = factory_movie('Matrix');
+ 
+alert(ghost.get_title());
+alert(matrix.get_title());
+ 
+ghost.set_title('공각기동대');
+ 
+alert(ghost.get_title());
+alert(matrix.get_title());
+```
+
+위의 예제를 통해서 알 수 있는 것들을 정리해보면 아래와 같다.
+
+1. 클로저는 객체의 메소드에서도 사용할 수 있다. 위의 예제는 함수의 리턴값으로 객체를 반환하고 있다. 이 객체는 메소드 get_title과 set_title을 가지고 있다. 이 메소드들은 외부함수인 factory_movie의 인자값으로 전달된 지역변수 title을 사용하고 있다.
+
+2. 동일한 외부함수 안에서 만들어진 내부함수나 메소드는 외부함수의 지역변수를 공유한다. 17행에서 실행된 set_title은 외부함수 factory_movie의 지역변수 title의 값을 '공각기동대'로 변경했다. 19행에서 ghost.get_title();의 값이 '공각기동대'인 것은 set_title와 get_title 함수가 title의 값을 공유하고 있다는 의미다.
+
+3. 그런데 똑같은 외부함수 factory_movie를 공유하고 있는 ghost와 matrix의 get_title의 결과는 서로 각각 다르다. 그것은 외부함수가 실행될 때마다 새로운 지역변수를 포함하는 클로저가 생성되기 때문에 ghost와 matrix는 서로 완전히 독립된 객체가 된다.
+
+4. factory_movie의 지역변수 title은 2행에서 정의된 객체의 메소드에서만 접근 할 수 있는 값이다. 이 말은 title의 값을 읽고 수정 할 수 있는 것은 factory_movie 메소드를 통해서 만들어진 객체 뿐이라는 의미다. JavaScript는 기본적으로 Private한 속성을 지원하지 않는데, 클로저의 이러한 특성을 이용해서 Private한 속성을 사용할 수 있게된다.
+
+`참고 Private 속성은 객체의 외부에서는 접근 할 수 없는 외부에 감춰진 속성이나 메소드를 의미한다. 이를 통해서 객체의 내부에서만 사용해야 하는 값이 노출됨으로서 생길 수 있는 오류를 줄일 수 있다. 자바와 같은 언어에서는 이러한 특성을 언어 문법 차원에서 지원하고 있다.`
+
+아래의 예제는 클로저와 관련해서 자주 언급되는 예제다. 
+
+```
+var arr = []
+for(var i = 0; i < 5; i++){
+    arr[i] = function(){
+        return i;
+    }
+}
+for(var index in arr) {
+    console.log(arr[index]());
+}
+```
+
+함수가 함수 외부의 컨텍스트에 접근할 수 있을 것으로 기대하겠지만 위의 결과는 아래와 같다.
+
+```
+5
+5
+5
+5
+5
+```
+위의 코드는 아래와 같이 변경해야 한다.
+
+```
+var arr = []
+for(var i = 0; i < 5; i++){
+    arr[i] = function(id) {
+        return function(){
+            return id;
+        }
+    }(i);
+}
+for(var index in arr) {
+    console.log(arr[index]());
+}
+```
+결과는 아래와 같다.
+
+```
+0
+1
+2
+3
+4
+```
