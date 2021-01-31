@@ -1336,7 +1336,7 @@ function outter(){
         alert(title);
     }
 }
-inner = outter();
+var inner = outter();
 inner();
 ```
 
@@ -1359,13 +1359,13 @@ function factory_movie(title){
 ghost = factory_movie('Ghost in the shell');
 matrix = factory_movie('Matrix');
  
-alert(ghost.get_title());
-alert(matrix.get_title());
+alert(ghost.get_title()); // Ghost in the shell
+alert(matrix.get_title()); // Matrix
  
-ghost.set_title('공각기동대');
+ghost.set_title('공각기동대'); // Ghost in the shell -->> 공각기동대
  
-alert(ghost.get_title());
-alert(matrix.get_title());
+alert(ghost.get_title()); // 공각기동대
+alert(matrix.get_title()); // Matrix
 ```
 
 위의 예제를 통해서 알 수 있는 것들을 정리해보면 아래와 같다.
