@@ -1173,7 +1173,7 @@ alert(name);
 
 ```
 for(int i = 0; i < 10; i++){
-    String name = "egoing";
+    String name = "js";
 }
 System.out.println(name);
 ```
@@ -1592,14 +1592,14 @@ document.write(p.introduce());
 ```
 function Person(){}
 var p1 = new Person();
-p1.name = 'egoing';
+p1.name = 'js';
 p1.introduce = function(){
     return 'My name is '+this.name; 
 }
 document.write(p1.introduce()+"<br />");
  
 var p2 = new Person();
-p2.name = 'leezche';
+p2.name = 'study';
 p2.introduce = function(){
     return 'My name is '+this.name; 
 }
@@ -1615,10 +1615,10 @@ function Person(name){
         return 'My name is '+this.name; 
     }   
 }
-var p1 = new Person('egoing');
+var p1 = new Person('js');
 document.write(p1.introduce()+"<br />");
  
-var p2 = new Person('leezche');
+var p2 = new Person('study');
 document.write(p2.introduce());
 ```
 
@@ -1628,3 +1628,43 @@ document.write(p2.introduce());
 
 
 일반적인 객체지향 언어에서 생성자는 클래스의 소속이다. 하지만 자바스크립트에서 객체를 만드는 주체는 함수다. 함수에 new를 붙이는 것을 통해서 객체를 만들 수 있다는 점은 자바스크립트에서 함수의 위상을 암시하는 단서이면서 또 자바스크립트가 추구하는 자유로움을 보여주는 사례라고 할 수 있다.
+
+<br>
+
+### **전역객체**
+---
+
+전역객체(Global object)는 특수한 객체다. 모든 객체는 이 전역객체의 프로퍼티다. 
+
+```
+function func(){
+    alert('Hello?');    
+}
+func();
+window.func();
+```
+
+func();와 window.func();는 모두 실행이 된다. 모든 전역변수와 함수는 사실 window 객체의 프로퍼티다. 객체를 명시하지 않으면 암시적으로 window의 프로퍼티로 간주된다. 
+
+```
+var o = {'func':function(){
+    alert('Hello?');
+}}
+o.func();
+window.o.func();
+```
+
+자바스크립트에서 모든 객체는 기본적으로 전역객체의 프로퍼티임을 알 수 있다. 
+
+<br>
+
+
+ECMAScript에서는 전역객체의 API를 정의해두었다. 그 외의 API는 호스트 환경에서 필요에 따라서 추가로 정의하고 있다. 이를테면 웹브라우저 자바스크립트에서는 alert()이라는 전역객체의 메소드가 존재하지만 node.js에는 존재하지 않는다. 또한 전역객체의 이름도 호스트환경에 따라서 다른데, 웹브라우저에서 전역객체는 window이지만 node.js에서는 global이다. 
+
+<br>
+
+### **this**
+---
+
+
+
