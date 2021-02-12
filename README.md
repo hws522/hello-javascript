@@ -1666,5 +1666,92 @@ ECMAScript에서는 전역객체의 API를 정의해두었다. 그 외의 API는
 ### **this**
 ---
 
+this는 함수 내에서 함수 호출 맥락(context)를 의미한다. 맥락이라는 것은 상황에 따라서 달라진다는 의미인데 즉 함수를 어떻게 호출하느냐에 따라서 this가 가리키는 대상이 달라진다는 뜻이다. 함수와 객체의 관계가 느슨한 자바스크립트에서 this는 이 둘을 연결시켜주는 실질적인 연결점의 역할을 한다.
+
+```
+function func(){
+    if(window === this){
+        document.write("window === this");
+    }
+}
+func();
+
+// window === this
+```
+
+객체의 소속인 메소드의 this는 그 객체를 가르킨다. 
+
+```
+var o = {
+    func : function(){
+        if(o === this){
+            document.write("o === this");
+        }
+    }
+}
+o.func();   
+
+// o === this
+```
+
+아래 코드는 함수를 호출했을 때와 new를 이용해서 생성자를 호출했을 때의 차이를 보여준다.
+
+```
+var funcThis = null; 
+ 
+function Func(){
+    funcThis = this;
+}
+var o1 = Func();
+if(funcThis === window){
+    document.write('window <br />');
+}
+ 
+var o2 = new Func();
+if(funcThis === o2){
+    document.write('o2 <br />');
+}
+
+// window
+// o2
+```
+생성자는 빈 객체를 만든다. 그리고 이 객체내에서 this는 만들어진 객체를 가르킨다. 이것은 매우 중요한 사실이다. 생성자가 실행되기 전까지는 객체는 변수에도 할당될 수 없기 때문에 this가 아니면 객체에 대한 어떠한 작업을 할 수 없기 때문이다. 
+
+```
+function Func(){
+    document.write(o);
+}
+var o = new Func();
+
+// undefined
+```
+
+<br>
 
 
+함수의 메소드인 apply, call을 이용하면 this의 값을 제어할 수 있다. 
+
+```
+var o = {}
+var p = {}
+function func(){
+    switch(this){
+        case o:
+            document.write('o<br />');
+            break;
+        case p:
+            document.write('p<br />');
+            break;
+        case window:
+            document.write('window<br />');
+            break;          
+    }
+}
+func();
+func.apply(o);
+func.apply(p);
+
+// window
+// o
+// p
+```

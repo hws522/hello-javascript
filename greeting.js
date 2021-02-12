@@ -1,3 +1,5 @@
-function welcome(){
-    return 'Hello world';
+function func(){
+    if(window === this){
+        document.write("window === this");
+    }
 }
