@@ -1924,7 +1924,7 @@ console.log(arr.rand());
 Object 객체는 객체의 가장 기본적인 형태를 가지고 있는 객체이다. 다시 말해서 아무것도 상속받지 않는 순수한 객체다. 자바스크립트에서는 값을 저장하는 기본적인 단위로 Object를 사용한다.
 
 ```
-var grades = {'egoing': 10, 'k8805': 6, 'sorialgi': 80};
+var grades = {'js': 10, 'k8805': 6, 'sorialgi': 80};
 ```
 
 동시에 자바스크립트의 모든 객체는 Object 객체를 상속 받는데, 그런 이유로 모든 객체는 Object 객체의 프로퍼티를 가지고 있다.
@@ -1940,10 +1940,10 @@ Object.prototype.contain = function(neddle) {
     }
     return false;
 }
-var o = {'name':'egoing', 'city':'seoul'}
-console.log(o.contain('egoing'));
-var a = ['egoing','leezche','grapittie'];
-console.log(a.contain('leezche'));
+var o = {'name':'js', 'city':'seoul'}
+console.log(o.contain('js'));
+var a = ['js','study','every'];
+console.log(a.contain('study'));
 ```
 
 그런데 Object 객체는 확장하지 않는 것이 바람직하다. 왜냐하면 모든 객체에 영향을 주기 때문이다. 
